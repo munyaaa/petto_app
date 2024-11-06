@@ -1,0 +1,1 @@
+const tokenKey = 'token';
