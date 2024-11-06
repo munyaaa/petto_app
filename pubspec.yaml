@@ -7,8 +7,12 @@ environment:
   sdk: ^3.5.0
 
 dependencies:
+  dio: ^5.7.0
   flutter:
     sdk: flutter
+  kiwi: ^5.0.1
+  rxdart: ^0.28.0
+  shared_preferences: ^2.3.2
 
 dev_dependencies:
   flutter_test:
