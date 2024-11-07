@@ -105,12 +105,12 @@ class _AuthenticationPageState extends State<AuthenticationPage> {
       ),
       body: Form(
         key: _formKey,
-        autovalidateMode: AutovalidateMode.onUnfocus,
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Column(
             children: [
               TextFormField(
+                autovalidateMode: AutovalidateMode.onUserInteraction,
                 controller: _usernameController,
                 decoration: InputDecoration(
                   hintText: 'Username',
@@ -129,6 +129,7 @@ class _AuthenticationPageState extends State<AuthenticationPage> {
               ),
               const SizedBox(height: 16.0),
               TextFormField(
+                autovalidateMode: AutovalidateMode.onUserInteraction,
                 controller: _passwordController,
                 obscureText: true,
                 decoration: InputDecoration(
