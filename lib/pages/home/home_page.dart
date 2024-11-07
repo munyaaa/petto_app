@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:petto_app/dependency_injection.dart';
 import 'package:petto_app/pages/authentication/authentication_page.dart';
+import 'package:petto_app/pages/add_pet/add_pet_page.dart';
 import 'package:petto_app/pages/home/home_view_model.dart';
 
 class HomePage extends StatefulWidget {
@@ -53,6 +54,19 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
         ],
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) {
+                return const AddPetPage();
+              },
+            ),
+          );
+        },
+        child: const Icon(Icons.add),
       ),
     );
   }
