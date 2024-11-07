@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:petto_app/dependency_injection.dart';
 import 'package:petto_app/pages/home/home_page.dart';
-import 'package:petto_app/pages/login/login_page.dart';
+import 'package:petto_app/pages/authentication/authentication_page.dart';
 import 'package:petto_app/pages/main/main_view_model.dart';
 
 class MainPage extends StatefulWidget {
@@ -16,6 +16,6 @@ class _MainPageState extends State<MainPage> {
 
   @override
   Widget build(BuildContext context) {
-    return _viewModel.isLogin() ? const HomePage() : const LoginPage();
+    return _viewModel.isLogin() ? const HomePage() : const AuthenticationPage();
   }
 }
