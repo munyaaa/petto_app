@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:kiwi/kiwi.dart';
 import 'package:petto_app/pages/authentication/authentication_view_model.dart';
+import 'package:petto_app/pages/home/home_view_model.dart';
 import 'package:petto_app/pages/main/main_view_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -29,6 +30,12 @@ class DependencyInjection {
     );
     container.registerFactory<AuthenticationViewModel>(
       (container) => AuthenticationViewModelImpl(
+        httpClient: container.resolve(),
+        sharedPreferences: container.resolve(),
+      ),
+    );
+    container.registerFactory<HomeViewModel>(
+      (container) => HomeViewModelImpl(
         httpClient: container.resolve(),
         sharedPreferences: container.resolve(),
       ),
