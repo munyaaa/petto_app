@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:kiwi/kiwi.dart';
+import 'package:petto_app/pages/add_pet/add_pet_view_model.dart';
 import 'package:petto_app/pages/authentication/authentication_view_model.dart';
 import 'package:petto_app/pages/home/home_view_model.dart';
 import 'package:petto_app/pages/main/main_view_model.dart';
@@ -36,6 +37,12 @@ class DependencyInjection {
     );
     container.registerFactory<HomeViewModel>(
       (container) => HomeViewModelImpl(
+        httpClient: container.resolve(),
+        sharedPreferences: container.resolve(),
+      ),
+    );
+    container.registerFactory<AddPetViewModel>(
+      (container) => AddPetViewModelImpl(
         httpClient: container.resolve(),
         sharedPreferences: container.resolve(),
       ),
