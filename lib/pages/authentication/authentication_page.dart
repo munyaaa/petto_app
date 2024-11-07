@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:petto_app/dependency_injection.dart';
 import 'package:petto_app/pages/authentication/authentication_view_model.dart';
+import 'package:petto_app/pages/home/home_page.dart';
 import 'package:petto_app/utils/page_state.dart';
 import 'package:petto_app/widgets/petto_loading.dart';
 
@@ -31,6 +32,7 @@ class _AuthenticationPageState extends State<AuthenticationPage> {
             PettoLoading.hide(context);
             ScaffoldMessenger.of(context).showSnackBar(
               const SnackBar(
+                backgroundColor: Colors.green,
                 content: Text('Success!'),
               ),
             );
@@ -39,6 +41,44 @@ class _AuthenticationPageState extends State<AuthenticationPage> {
             PettoLoading.hide(context);
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
+                backgroundColor: Colors.red,
+                content: Text(
+                  state.getError(),
+                ),
+              ),
+            );
+            return;
+        }
+      },
+    );
+
+    _viewModel.loginState.listen(
+      (state) {
+        switch (state.getState()) {
+          case StateType.loading:
+            return PettoLoading.show(context);
+          case StateType.success:
+            PettoLoading.hide(context);
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(
+                backgroundColor: Colors.green,
+                content: Text('Success!'),
+              ),
+            );
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (context) {
+                  return const HomePage();
+                },
+              ),
+            );
+            return;
+          case StateType.error:
+            PettoLoading.hide(context);
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                backgroundColor: Colors.red,
                 content: Text(
                   state.getError(),
                 ),
@@ -51,6 +91,13 @@ class _AuthenticationPageState extends State<AuthenticationPage> {
   }
 
   @override
+  void dispose() {
+    _viewModel.registerState.close();
+    _viewModel.loginState.close();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -58,7 +105,7 @@ class _AuthenticationPageState extends State<AuthenticationPage> {
       ),
       body: Form(
         key: _formKey,
-        autovalidateMode: AutovalidateMode.onUserInteraction,
+        autovalidateMode: AutovalidateMode.onUnfocus,
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Column(
@@ -118,6 +165,7 @@ class _AuthenticationPageState extends State<AuthenticationPage> {
                   } else {
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(
+                        backgroundColor: Colors.red,
                         content: Text('Please fill the form!'),
                       ),
                     );
@@ -131,13 +179,14 @@ class _AuthenticationPageState extends State<AuthenticationPage> {
               child: ElevatedButton(
                 onPressed: () {
                   if (_formKey.currentState?.validate() == true) {
-                    _viewModel.register(
+                    _viewModel.login(
                       _usernameController.text,
                       _passwordController.text,
                     );
                   } else {
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(
+                        backgroundColor: Colors.red,
                         content: Text('Please fill the form!'),
                       ),
                     );

@@ -30,6 +30,7 @@ class DependencyInjection {
     container.registerFactory<AuthenticationViewModel>(
       (container) => AuthenticationViewModelImpl(
         httpClient: container.resolve(),
+        sharedPreferences: container.resolve(),
       ),
     );
   }
