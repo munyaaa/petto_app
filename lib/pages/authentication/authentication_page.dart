@@ -94,6 +94,8 @@ class _AuthenticationPageState extends State<AuthenticationPage> {
   void dispose() {
     _viewModel.registerState.close();
     _viewModel.loginState.close();
+    _usernameController.dispose();
+    _passwordController.dispose();
     super.dispose();
   }
 
