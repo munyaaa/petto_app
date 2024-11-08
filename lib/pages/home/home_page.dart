@@ -84,6 +84,13 @@ class _HomePageState extends State<HomePage> {
                 );
               case StateType.success:
                 final data = state.getData();
+
+                if (data.isEmpty) {
+                  return const Center(
+                    child: Text('Pet data is empty!'),
+                  );
+                }
+
                 return ListView.separated(
                   itemBuilder: (context, index) {
                     return ListTile(
