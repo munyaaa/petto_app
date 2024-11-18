@@ -46,7 +46,7 @@ class AddPetViewModelImpl implements AddPetViewModel {
       final token = sharedPreferences.getString(tokenKey);
 
       final response = await httpClient.get(
-        '/v1/pet_types',
+        '/pet_types',
         options: Options(
           headers: {'Authorization': 'Bearer $token'},
         ),
@@ -90,7 +90,7 @@ class AddPetViewModelImpl implements AddPetViewModel {
       final token = sharedPreferences.getString(tokenKey);
 
       await httpClient.post(
-        '/v1/pets',
+        '/pets',
         data: request.toJson(),
         options: Options(
           headers: {'Authorization': 'Bearer $token'},

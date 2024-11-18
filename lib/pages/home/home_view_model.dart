@@ -49,7 +49,7 @@ class HomeViewModelImpl implements HomeViewModel {
       final token = sharedPreferences.getString(tokenKey);
 
       final response = await httpClient.get(
-        '/v1/pets',
+        '/pets',
         options: Options(
           headers: {'Authorization': 'Bearer $token'},
         ),

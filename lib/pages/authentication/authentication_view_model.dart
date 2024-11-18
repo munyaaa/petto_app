@@ -38,7 +38,7 @@ class AuthenticationViewModelImpl implements AuthenticationViewModel {
       );
 
       await httpClient.post(
-        '/v1/auth/register',
+        '/auth/register',
         data: {
           'username': username,
           'password': password,
@@ -71,7 +71,7 @@ class AuthenticationViewModelImpl implements AuthenticationViewModel {
       );
 
       final response = await httpClient.post(
-        '/v1/auth/login',
+        '/auth/login',
         data: {
           'username': username,
           'password': password,
